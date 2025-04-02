@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.example.pojo.entity.Product" table="product">
+        <comment>商品資料表</comment>
+
+        <id name="prod_id" type="java.lang.String">
+            <column name="prod_id" length="20"/>
+            <generator class="com.example.utils.IdGenerateUtil"/>
+        </id>
+
+        <property name="prod_name" type="java.lang.String">
+            <column name="prod_name" length="50"/>
+        </property>
+
+        <property name="prod_price" type="java.lang.Double">
+            <column name="prod_price"/>
+        </property>
+
+        <property name="prod_stock" type="java.lang.Integer">
+            <column name="prod_stock"/>
+        </property>
+
+        <property name="prod_category" type="java.lang.String">
+            <column name="prod_category" length="30"/>
+        </property>
+
+        <property name="prod_category_id" type="java.lang.String">
+            <column name="prod_category_id" length="20"/>
+        </property>
+
+        <property name="prod_description" type="java.lang.String">
+            <column name="prod_description" length="255"/>
+        </property>
+
+        <property name="prod_image_url" type="java.lang.String">
+            <column name="prod_image_url" length="255"/>
+        </property>
+
+        <property name="prod_status" type="java.lang.Integer">
+            <column name="prod_status"/>
+        </property>
+
+        <property name="prod_rating" type="java.lang.Double">
+            <column name="prod_rating"/>
+        </property>
+
+        <property name="prod_review_count" type="java.lang.Integer">
+            <column name="prod_review_count"/>
+        </property>
+
+        <property name="prod_create_date" type="java.util.Date">
+            <column name="prod_create_date" length="7"/>
+        </property>
+    </class>
+</hibernate-mapping>
