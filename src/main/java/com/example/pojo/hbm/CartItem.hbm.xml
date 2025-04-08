@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.example.pojo.entity.CartItem" table="cart_item">
+        <comment>購物車項目資料表</comment>
+
+        <id name="cart_id" type="java.lang.String">
+            <column name="cart_id" length="20"/>
+            <generator class="com.example.utils.IdGenerateUtil"/>
+        </id>
+
+        <property name="cart_user_id" type="java.lang.String">
+            <column name="cart_user_id" length="20"/>
+        </property>
+
+        <property name="cart_product_id" type="java.lang.String">
+            <column name="cart_product_id" length="20"/>
+        </property>
+
+        <property name="cart_quantity" type="java.lang.Integer">
+            <column name="cart_quantity"/>
+        </property>
+
+        <property name="cart_price" type="java.lang.Double">
+            <column name="cart_price"/>
+        </property>
+
+        <property name="cart_create_date" type="java.util.Date">
+            <column name="cart_create_date" length="7"/>
+        </property>
+    </class>
+</hibernate-mapping>

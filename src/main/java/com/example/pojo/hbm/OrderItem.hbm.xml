@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.example.pojo.entity.OrderItem" table="order_item">
+        <comment>訂單明細項目資料表</comment>
+
+        <id name="item_id" type="java.lang.String">
+            <column name="item_id" length="20"/>
+            <generator class="com.example.utils.IdGenerateUtil"/>
+        </id>
+
+        <property name="item_orders_id" type="java.lang.String">
+            <column name="item_orders_id" length="20"/>
+        </property>
+
+        <property name="item_product_id" type="java.lang.String">
+            <column name="item_product_id" length="20"/>
+        </property>
+
+        <property name="item_quantity" type="java.lang.Integer">
+            <column name="item_quantity"/>
+        </property>
+
+        <property name="item_price" type="java.lang.Double">
+            <column name="item_price"/>
+        </property>
+
+        <property name="item_subtotal" type="java.lang.Double">
+            <column name="item_subtotal"/>
+        </property>
+    </class>
+</hibernate-mapping>

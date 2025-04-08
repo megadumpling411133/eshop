@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.example.pojo.entity.UserAddress" table="user_address">
+        <comment>使用者收貨地址表</comment>
+
+        <id name="addr_id" type="java.lang.String">
+            <column name="addr_id" length="20"/>
+            <generator class="com.example.utils.IdGenerateUtil"/>
+        </id>
+
+        <property name="addr_user_id" type="java.lang.String">
+            <column name="addr_user_id" length="20"/>
+        </property>
+
+        <property name="addr_name" type="java.lang.String">
+            <column name="addr_name" length="50"/>
+        </property>
+
+        <property name="addr_tel" type="java.lang.String">
+            <column name="addr_tel" length="20"/>
+        </property>
+
+        <property name="addr_city" type="java.lang.String">
+            <column name="addr_city" length="50"/>
+        </property>
+
+        <property name="addr_detail" type="java.lang.String">
+            <column name="addr_detail" length="255"/>
+        </property>
+
+        <property name="addr_zipcode" type="java.lang.String">
+            <column name="addr_zipcode" length="10"/>
+        </property>
+
+        <property name="addr_default" type="java.lang.Boolean">
+            <column name="addr_default"/>
+        </property>
+    </class>
+</hibernate-mapping>

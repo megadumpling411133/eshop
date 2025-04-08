@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.example.pojo.entity.Review" table="review">
+        <comment>商品評論資料表</comment>
+
+        <id name="rev_id" type="java.lang.String">
+            <column name="rev_id" length="20"/>
+            <generator class="com.example.utils.IdGenerateUtil"/>
+        </id>
+
+        <property name="rev_user_id" type="java.lang.String">
+            <column name="rev_user_id" length="20"/>
+        </property>
+
+        <property name="rev_product_id" type="java.lang.String">
+            <column name="rev_product_id" length="20"/>
+        </property>
+
+        <property name="rev_rating" type="java.lang.Integer">
+            <column name="rev_rating"/>
+        </property>
+
+        <property name="rev_comment" type="java.lang.String">
+            <column name="rev_comment" length="255"/>
+        </property>
+
+        <property name="rev_create_date" type="java.util.Date">
+            <column name="rev_create_date" length="7"/>
+        </property>
+    </class>
+</hibernate-mapping>
