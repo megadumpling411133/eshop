@@ -31,3 +31,8 @@ build/
 Thumbs.db
 
 
+# tree 專案結構.txt
+*.txt
+
+
+

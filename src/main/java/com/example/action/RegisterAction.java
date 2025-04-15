@@ -34,7 +34,8 @@ public class RegisterAction extends BaseAction {
      * @return 返回註冊頁面
      */
     public String register() {
-        return SUCCESS;
+    	System.out.println("✅ RegisterAction.register() 被執行了！");
+        return INPUT;
     }
     
     /**
@@ -42,6 +43,7 @@ public class RegisterAction extends BaseAction {
      * @return 註冊成功返回 SUCCESS，失敗返回 INPUT
      */
     public String save() {
+    	System.out.println("✅ RegisterAction.save() 被執行了");
         // 註冊前的資料檢查
         if (!doCheck(user)) {
             return INPUT;

@@ -20,15 +20,19 @@
         <!-- 註解：處理註冊頁面請求的 action -->
         <action name="register" class="com.example.action.RegisterAction" method="register">
             <!-- 註解：當註冊成功後，轉跳到註冊頁面 -->
-            <result name="success">/WEB-INF/views/register/register.jsp</result>
+            <result name="input" >/WEB-INF/views/register.jsp</result>
         </action>
+      	       
 
         <!-- 註解：處理註冊資料儲存的 action -->
         <action name="save" class="com.example.action.RegisterAction" method="save">
+        	<!-- 若跳轉目標是 /WEB-INF/... 下的頁面，就不適合用 redirect，應改用 forward（預設） -->
             <!-- 註解：如果發生錯誤，會導向錯誤頁面 -->
             <result name="error" type="redirect">/error.jsp</result>
             <!-- 註解：註冊成功後，跳轉到登入頁面 -->
             <result name="success" type="redirect">/login.jsp</result>
+            
+            <!-- <result name="input">/register.jsp</result> -->
         </action>
     </package>
 </struts>

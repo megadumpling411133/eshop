@@ -7,16 +7,16 @@
         <!-- 註解：用來描述該資料表的功能 -->
         <comment>使用者資料表</comment>
         
-        <!-- 定義 id 欄位，並指定生成策略 -->
-        <id name="id" type="java.lang.String">
-            <column name="id" length="20" />
+        <!-- 定義 user_id 欄位，並指定生成策略 -->
+        <id name="user_id" type="java.lang.String">
+            <column name="user_id" length="20" />
             <!-- 註解：使用自定義的 id 生成策略 -->
             <generator class="com.example.utils.IdGenerateUtil" />
         </id>
         
         <!-- 定義使用者名稱欄位 -->
-        <property name="name" type="java.lang.String">
-            <column name="name" length="20">
+        <property name="user_name" type="java.lang.String">
+            <column name="user_name" length="20">
                 <!-- 註解：使用者名稱 -->
                 <comment>使用者名稱</comment>
             </column>
@@ -24,7 +24,7 @@
         
         <!-- 定義登入帳號欄位，並設置為不可為 null -->
         <property name="loginId" type="java.lang.String" not-null="true">
-            <column name="login_id" length="20">
+            <column name="loginId" length="20">
                 <!-- 註解：登入帳號 -->
                 <comment>登入帳號</comment>
             </column>
@@ -55,3 +55,4 @@
         </property>
     </class>
 </hibernate-mapping>
+

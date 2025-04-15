@@ -48,7 +48,14 @@
                     <td colspan="2" align="center">
                         <br />
                         <button type="button" onclick="validateAndSubmit()">登入</button>
-                        &nbsp;<a href="register/register" style="text-decoration: none;">註冊</a>
+                        <!-- 
+                        		原本的 <a> href="register/register" 
+                        		第一個 register 是 Struts 		<package> 的屬性 namespace="/register" 這會讓所有的 action URL 前綴會是 /register/ 開始
+                        		第二個 register 是 action 名稱		<action>  的屬性 name="register"
+                         -->
+                        <!-- &nbsp;<a href="register/register" style="text-decoration: none;">註冊</a> -->
+                        <!-- &nbsp;<a href="register.jsp" style="text-decoration: none;">註冊</a> -->
+                        &nbsp;<a href="register/register" style="text-decoration: none;">註冊</a><!-- 成功跳轉 -->
                     </td>
                 </tr>
             </table>
