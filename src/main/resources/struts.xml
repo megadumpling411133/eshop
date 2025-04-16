@@ -39,16 +39,16 @@
     </package>
 
     <!-- ✅ 🔽 新增的 product 專用 action package -->
-    <package name="product" namespace="/product" extends="struts-default">
+        <package name="product" namespace="/product" extends="default">
 
-        <!-- 查詢所有商品 -->
+        <!-- 查詢所有商品（改用 /WEB-INF 路徑） -->
         <action name="findAll" class="com.example.action.ProductAction" method="findAll">
-            <result name="success">/product_list.jsp</result>
+            <result name="success">/WEB-INF/jsp/ProductList.jsp</result>
         </action>
 
-        <!-- 查詢單一商品 -->
+        <!-- 查詢單一商品（你可後續建立 ProductDetail.jsp） -->
         <action name="findById" class="com.example.action.ProductAction" method="findById">
-            <result name="success">/product_detail.jsp</result>
+            <result name="success">/WEB-INF/jsp/ProductDetail.jsp</result>
         </action>
 
         <!-- 新增商品 -->

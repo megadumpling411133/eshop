@@ -55,7 +55,7 @@
                          -->
                         <!-- &nbsp;<a href="register/register" style="text-decoration: none;">註冊</a> -->
                         <!-- &nbsp;<a href="register.jsp" style="text-decoration: none;">註冊</a> -->
-                        &nbsp;<a href="register/register" style="text-decoration: none;">註冊</a><!-- 成功跳轉 -->
+                        &nbsp;<a href="register/register" style="text-decoration: none;">註冊321</a><!-- 成功跳轉 -->
                     </td>
                 </tr>
             </table>

@@ -38,12 +38,14 @@
             <!-- 
                 當驗證未通過（輸入錯誤）時，重新導向至登入頁面 
             -->
-            <result name="input" type="redirect">/login.jsp</result>
+            <!-- <result name="input" type="redirect">/login.jsp</result> -->
 
             <!-- 
                 當登入成功時，導向至首頁 
             -->
-            <result name="success" type="redirect">/home/index</result>
+            <!-- <result name="success" type="redirect">/home/index</result> -->
+            <result name="success" >/WEB-INF/views/index.jsp</result>
+            <result name="input" >/WEB-INF/views/login.jsp</result>
         </action>
     </package>
 </struts>

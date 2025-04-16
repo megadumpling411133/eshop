@@ -38,8 +38,10 @@ public class LoginAction extends BaseAction {
      * @return 若登入成功返回 SUCCESS，若登入失敗返回 INPUT
      */
     public String doLogin() {
+    	System.out.println("doLogin 檢查登入帳號密碼");
         // 檢查是否提供了登入 ID 和密碼
         if (user == null || user.getLoginId() == null || user.getPassword() == null) {
+        	System.out.println("doLogin 123");
             getSession().setAttribute("msg", "請提供有效的帳號與密碼");
             return INPUT;
         }

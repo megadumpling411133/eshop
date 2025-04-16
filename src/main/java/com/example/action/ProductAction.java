@@ -35,7 +35,6 @@ public class ProductAction {
         this.productList = productList;
     }
 
-    // 後續會加入：add(), update(), delete(), findById(), findAll() 等方法
     // 新增商品
     public String add() {
         productService.save(product);
