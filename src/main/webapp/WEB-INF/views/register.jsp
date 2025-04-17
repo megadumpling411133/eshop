@@ -20,13 +20,14 @@
 
 <!-- 請勿使用 HTML 註解包住 struts 標籤，會導致 Jasper 誤判 -->
 <%-- 使用者註冊表單開始 --%>
-<s:form action="register" method="post">
-    <s:textfield name="user.user_id" label="使用者ID" />
-    <s:textfield name="user.user_name" label="使用者名稱" />
-    <s:textfield name="user.login_id" label="登入帳號" />
-    <s:password name="user.password" label="密碼" />
-    <s:textfield name="user.tel" label="電話" />
-    <s:submit value="註冊" />
+<s:form action="register/save" method="post">
+    <s:textfield name="user.user_id" label="使用者ID (user_id)" />
+    <s:textfield name="user.user_name" label="使用者名稱 (user_name)" />
+    <s:textfield name="user.loginId" label="登入帳號 (loginId)" />
+    <s:password name="user.password" label="密碼 (password)" />
+    <s:textfield name="user.tel" label="電話 (tel)" />
+    <s:textfield name="user.createDate" label="註冊日期 (createDate)" />
+    <s:submit value="註冊456" />
 </s:form>
 <%-- 使用者註冊表單結束 --%>
 

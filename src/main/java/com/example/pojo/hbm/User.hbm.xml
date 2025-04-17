@@ -6,19 +6,20 @@
     <class name="com.example.pojo.entity.User" table="user">
         <!-- 註解：用來描述該資料表的功能 -->
         <comment>使用者資料表</comment>
-        
+        <!-- <id> 對應 primary key -->
         <!-- 定義 user_id 欄位，並指定生成策略 -->
-        <id name="user_id" type="java.lang.String">
+        <id name="user_id" type="int"> <!-- 這種寫法步允許 null -->
             <column name="user_id" length="20" />
             <!-- 註解：使用自定義的 id 生成策略 -->
             <generator class="com.example.utils.IdGenerateUtil" />
         </id>
         
+        <!-- 註解：使用者名稱 -->
+        <comment>使用者名稱</comment>
+        <!-- property 對應一般欄位 -->
         <!-- 定義使用者名稱欄位 -->
-        <property name="user_name" type="java.lang.String">
-            <column name="user_name" length="20">
-                <!-- 註解：使用者名稱 -->
-                <comment>使用者名稱</comment>
+        <property name="user_name" type="java.lang.String"> <!-- 這種 type 寫法可允許 null -->
+            <column name="user_name" length="20">    
             </column>
         </property>
         

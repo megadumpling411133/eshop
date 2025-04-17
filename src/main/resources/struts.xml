@@ -4,9 +4,13 @@
     "http://struts.apache.org/dtds/struts-2.1.dtd">
 <struts>
     <!-- 引用 Struts 預設設定 -->
-    <include file="struts-default.xml" />
+    <!-- <include file="struts-default.xml" />
+    <include file="struts/struts-login.xml" />
+    <include file="struts/struts-home.xml" />
+    <include file="struts/struts-register.xml" /> -->
 
     <!-- 常數配置 -->
+    <!-- 核心設定檔 -->
     <constant name="struts.multipart.maxSize" value="2097152000" />
     <constant name="struts.action.extension" value="action,do,," />
 
@@ -38,8 +42,8 @@
         </global-exception-mappings>
     </package>
 
-    <!-- ✅ 🔽 新增的 product 專用 action package -->
-        <package name="product" namespace="/product" extends="default">
+    <!-- 新增的 product 專用 action package -->
+    <package name="product" namespace="/product" extends="default">
 
         <!-- 查詢所有商品（改用 /WEB-INF 路徑） -->
         <action name="findAll" class="com.example.action.ProductAction" method="findAll">
@@ -67,8 +71,14 @@
         </action>
     </package>
 
-    <!-- 既有的其他功能模組 -->
-    <include file="struts/struts-login.xml"/>
+    <!-- 加入的其他功能模組 放在指定的 classpath 之下-->
+    <!-- file 指定其他設定檔與路徑 在主設定檔的 classpath 之下 -->
+    <!-- <include file="struts/struts-login.xml"/>
     <include file="struts/struts-register.xml"/>
-    <include file="struts/struts-home.xml"/>
+    <include file="struts/struts-home.xml"/> -->
+    <!-- 測試繼續加入相同的 include -->
+    <include file="struts-default.xml" />
+    <include file="struts/struts-login.xml" />
+    <include file="struts/struts-home.xml" />
+    <include file="struts/struts-register.xml" />
 </struts>

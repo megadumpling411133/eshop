@@ -22,7 +22,7 @@
             <!-- 註解：當註冊成功後，轉跳到註冊頁面 -->
             <result name="input" >/WEB-INF/views/register.jsp</result>
         </action>
-      	       
+      	      
 
         <!-- 註解：處理註冊資料儲存的 action -->
         <action name="save" class="com.example.action.RegisterAction" method="save">
@@ -31,8 +31,8 @@
             <result name="error" type="redirect">/error.jsp</result>
             <!-- 註解：註冊成功後，跳轉到登入頁面 -->
             <result name="success" type="redirect">/login.jsp</result>
-            
-            <!-- <result name="input">/register.jsp</result> -->
+            <!-- 登入失敗 回到註冊 -->
+            <result name="input">/WEB-INF/views/register.jsp</result>
         </action>
     </package>
 </struts>

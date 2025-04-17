@@ -26,11 +26,14 @@ public class HomeAction extends BaseAction {
      */
     public String goHome() {
         User user = (User) getSession().getAttribute(ConstantName.SESSION_USER);
+        System.out.println("HomeAction goHome: 取得 user :" + user);
         if (user != null) {
+        	System.out.println("HomeAction goHome 有 user: " + user);
             getRequest().setAttribute("user", user);
             return SUCCESS;
         } else {
             // 如果使用者未登入，重定向到登入頁
+        	System.out.println("HomeAction goHome: 未登入 跳轉到登入頁");
             return "login"; 
         }
     }

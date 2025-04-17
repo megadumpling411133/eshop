@@ -30,22 +30,14 @@
         -->
         <action name="login" class="com.example.action.LoginAction" method="doLogin">
             <!-- 
-                若在這裡手動加入 interceptor-ref，則會覆蓋 default-interceptor-ref，
-                這樣其他攔截器（如 fileUpload）將無法生效，需謹慎使用。
+                當登入成功時，導向至首頁（透過 forward 顯示 index.jsp）
             -->
-            <!-- <interceptor-ref name="authenticationInterceptor" /> -->
+            <result name="success">/WEB-INF/views/index.jsp</result>
 
             <!-- 
-                當驗證未通過（輸入錯誤）時，重新導向至登入頁面 
+                當驗證失敗或欄位為空，forward 回 login.jsp（來自 webapp 根目錄）
             -->
-            <!-- <result name="input" type="redirect">/login.jsp</result> -->
-
-            <!-- 
-                當登入成功時，導向至首頁 
-            -->
-            <!-- <result name="success" type="redirect">/home/index</result> -->
-            <result name="success" >/WEB-INF/views/index.jsp</result>
-            <result name="input" >/WEB-INF/views/login.jsp</result>
+            <result name="input">/login.jsp</result>
         </action>
     </package>
 </struts>
