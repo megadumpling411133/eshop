@@ -42,7 +42,8 @@ public class LoginAction extends BaseAction {
         // 檢查是否提供了登入 ID 和密碼
         if (user == null || user.getLoginId() == null || user.getPassword() == null) {
         	System.out.println("doLogin 123");
-            getSession().setAttribute("msg", "請提供有效的帳號與密碼");
+            // getSession().setAttribute("msg", "請提供有效的帳號與密碼"); 此寫法會讓訊息一直存在 session 中 而每次驗證 只應顯示一次刷新網頁應刷掉訊息
+            getRequest().setAttribute("msg", "請提供有效的帳號與密碼");
             return INPUT;
         }
 
@@ -57,7 +58,8 @@ public class LoginAction extends BaseAction {
         }
 
         // 登入失敗，顯示錯誤訊息並返回輸入頁
-        getSession().setAttribute("msg", "帳號或密碼錯誤");
+        // getSession().setAttribute("msg", "帳號或密碼錯誤");
+        getRequest().setAttribute("msg", "帳號或密碼錯誤");
         return INPUT;
     }
 

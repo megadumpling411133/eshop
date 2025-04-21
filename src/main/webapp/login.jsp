@@ -33,13 +33,13 @@
                     </tr>
                 </c:if>
                 <tr>
-                    <td>使用者名稱：</td>
+                    <td>使用者名稱(loginId)：</td>
                     <td>
                         <input type="text" name="loginId" value='<c:out value="${loginId}"/>' required>
                     </td>
                 </tr>
                 <tr>
-                    <td>密碼：</td>
+                    <td>密碼(password)：</td>
                     <td>
                         <input type="password" name="password" required>
                     </td>
@@ -80,5 +80,6 @@
             $("#loginForm").submit();
         }
     </script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </body>
 </html>

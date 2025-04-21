@@ -109,16 +109,23 @@
             <version>1.2.11</version>
         </dependency>
         <dependency>
-  <groupId>org.apache.logging.log4j</groupId>
-  <artifactId>log4j-core</artifactId>
-  <version>2.20.0</version> <!-- 根據你需要的版本調整 -->
-</dependency>
+  			<groupId>org.apache.logging.log4j</groupId>
+  			<artifactId>log4j-core</artifactId>
+  			<version>2.20.0</version> <!-- 根據你需要的版本調整 -->
+		</dependency>
 
-<dependency>
-  <groupId>org.apache.logging.log4j</groupId>
-  <artifactId>log4j-api</artifactId>
-  <version>2.20.0</version>
-</dependency>
+		<dependency>
+  			<groupId>org.apache.logging.log4j</groupId>
+  			<artifactId>log4j-api</artifactId>
+  			<version>2.20.0</version>
+		</dependency>
+		<!-- JPA annotation 方式自動生成 getter/setter -->
+		<!--<dependency>
+		    <groupId>org.projectlombok</groupId>
+		    <artifactId>lombok</artifactId>
+		    <version>1.18.30</version>  或其他最新版 
+		    <scope>provided</scope>
+		</dependency>-->
 
 	</dependencies>
 	<build>

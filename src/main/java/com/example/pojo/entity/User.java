@@ -4,7 +4,7 @@ import java.util.Date;
 
 /**
  * 使用者實體類別，用來封裝使用者資料。
- * 若透過 JPA 注解方式來配置，則無需再額外配置 hbm.xml 文件。
+ * 若透過 JPA annotation 方式來配置，則無需再額外配置 hbm.xml 文件。
  */
 public class User {
 	// 對應到 hbm.xml <property> 的 name 屬性值
