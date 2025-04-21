@@ -21,7 +21,9 @@
     <script src="public/jquery-3.4.1.min.js"></script>
 </head>
 <body>
-    <form id="loginForm" action="login/login" method="post">
+    <!-- <form id="loginForm" action="login/login" method="post"> -->
+    <form id="loginForm" action="<s:url action='login' namespace='/login' />" method="post">
+    
         <div style="margin: 50px;">
             <table>
                 <!-- 顯示錯誤訊息 -->
