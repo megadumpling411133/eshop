@@ -18,6 +18,7 @@
         -->
         <action name="index" class="com.example.action.HomeAction" method="goHome">
             <result name="success">/WEB-INF/views/index.jsp</result>
+            <!-- <result name="success">/WEB-INF/views/home.jsp</result> 改成這樣-->
         </action>
 
         <!-- 
@@ -28,7 +29,7 @@
             - 當輸入無效（input）時，重新導向 `/login.jsp`（登入頁面）
         -->
         <action name="logout" class="com.example.action.HomeAction" method="logOut">
-            <result name="input" type="redirect">/login.jsp</result>
+            <result name="input" >/WEB-INF/views/login.jsp</result>
         </action>
 
         <!-- 

@@ -30,7 +30,7 @@
             <!-- 註解：如果發生錯誤，會導向錯誤頁面 -->
             <result name="error" type="redirect">/error.jsp</result>
             <!-- 註解：註冊成功後，跳轉到登入頁面 -->
-            <result name="success" type="redirect">/login.jsp</result>
+            <result name="success" >/WEB-INF/views/login.jsp</result>
             <!-- 登入失敗 回到註冊 -->
             <result name="input">/WEB-INF/views/register.jsp</result>
         </action>

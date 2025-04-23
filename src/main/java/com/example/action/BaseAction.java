@@ -23,6 +23,11 @@ public class BaseAction extends ActionSupport implements ModelDriven<Object> {
     /**
      * 實作 ModelDriven 介面的 getModel 方法，這裡返回 null，表示不使用模型驅動
      * @return null
+     * 
+     * 此處 @Override 是 JAVA 的 不是 AOP
+     * 是實作 ModelDriven 塞的值
+     * 這裡是 BaseAction 所以 return null 不在這裡定義塞值方式
+     * 相當於 JSP2 的 bean
      */
     @Override
     public Object getModel() {
