@@ -34,7 +34,9 @@ public class HomeAction extends BaseAction {
         } else {
             // 如果使用者未登入，重定向到登入頁
         	System.out.println("HomeAction goHome: 未登入 跳轉到登入頁");
-            return "login"; 
+        	// action class 設定 5 個 constant 大寫表示
+        	// 不要 hard code return "login";
+            return LOGIN; 
         }
     }
 
@@ -44,7 +46,7 @@ public class HomeAction extends BaseAction {
      */
     public String logOut() {
         getSession().invalidate(); // 無效化 session
-        return "login"; // 返回登入頁面
+        return LOGIN; // 返回登入頁面
     }
 
     /**

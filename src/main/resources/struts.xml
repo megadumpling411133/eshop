@@ -11,7 +11,9 @@
 
     <!-- 常數配置 -->
     <!-- 核心設定檔 -->
+    <!-- struts.multipart.maxSize -> file upload -->
     <constant name="struts.multipart.maxSize" value="2097152000" />
+    <!-- 設定 url 顯示 OOXX.extension(副檔名) OOXX.ation -->
     <constant name="struts.action.extension" value="action,do,," />
 
     <!-- 🔹 既有 default package，內含全域攔截器設定 -->
@@ -29,7 +31,7 @@
         <default-interceptor-ref name="globalStack" />
 
         <global-results>
-            <result name="login" type="redirect">/login.jsp</result>
+            <result name="login" type="dispatcher">/WEB-INF/views/login.jsp</result>
             <result name="error" type="redirect">/404.html</result>
             <result name="other" type="redirectAction">
                 <param name="actionName">login</param>

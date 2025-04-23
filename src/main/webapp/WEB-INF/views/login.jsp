@@ -21,7 +21,9 @@
     <script src="public/jquery-3.4.1.min.js"></script>
 </head>
 <body>
-    <form id="loginForm" action="login/login" method="post">
+    <!-- <form id="loginForm" action="login/login" method="post"> --> <!-- 多重 namespace 錯誤  /eshop/login/login/login-->
+    <form id="loginForm" action="<s:url action='login' namespace='/login' />" method="post">
+    
         <div style="margin: 50px;">
             <table>
                 <!-- 顯示錯誤訊息 -->
@@ -55,7 +57,11 @@
                          -->
                         <!-- &nbsp;<a href="register/register" style="text-decoration: none;">註冊</a> -->
                         <!-- &nbsp;<a href="register.jsp" style="text-decoration: none;">註冊</a> -->
-                        &nbsp;<a href="register/register" style="text-decoration: none;">註冊321</a><!-- 成功跳轉 -->
+                        <!-- &nbsp;<a href="${pageContext.request.contextPath}/register/register.action" style="text-decoration: none;">註冊321</a><!-- 成功跳轉 --> 
+                    	<s:url action="register" namespace="/register" var="registerUrl" />
+						<a href="${registerUrl}">註冊</a>
+						
+                    	
                     </td>
                 </tr>
             </table>

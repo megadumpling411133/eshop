@@ -37,7 +37,9 @@
             <!-- 
                 當驗證失敗或欄位為空，forward 回 login.jsp（來自 webapp 根目錄）
             -->
-            <result name="input">/login.jsp</result>
+            <!-- 這裡沒有經過 action 而是直接跳轉到 login.jsp 應放到 views 內由 action 控制 -->
+            <!-- <result name="input">/login.jsp</result>  相當於位在 .  相對路徑到 /login.jsp -->
+            <result name="input" >/WEB-INF/views/login.jsp</result> 
         </action>
     </package>
 </struts>
