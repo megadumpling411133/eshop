@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <!-- 定義 User 類別對應的資料表，這裡是 'user' 資料表 -->
+    <class name="com.example.pojo.entity.User" table="user">
+        <!-- 註解：用來描述該資料表的功能 -->
+        <!-- <comment>使用者資料表</comment> -->
+        <!-- <id> 對應 primary key -->
+        <!-- 定義 user_id 欄位，並指定生成策略 -->
+        <!-- <id name="user_id" type="int"> --> <!-- 這種寫法不允許 null -->
+        <id name="user_id" type="string"> <!-- 改為 string 保持一致 -->
+            <column name="user_id" length="20" />
+            <!-- 註解：使用自定義的 id 生成策略 -->
+            <generator class="com.example.utils.IdGenerateUtil" />
+        </id>
+        
+        <!-- 註解：使用者名稱 -->
+        <!-- <comment>使用者名稱</comment> -->
+        <!-- property 對應一般欄位 -->
+        <!-- 定義使用者名稱欄位 -->
+        <property name="user_name" type="java.lang.String"> <!-- 這種 type 寫法可允許 null -->
+            <column name="user_name" length="20">    
+            </column>
+        </property>
+        
+        <!-- 定義登入帳號欄位，並設置為不可為 null -->
+        <property name="loginId" type="java.lang.String" not-null="true">
+            <column name="loginId" length="20">
+                <!-- 註解：登入帳號 -->
+                <!-- <comment>登入帳號</comment> -->
+            </column>
+        </property>
+        
+        <!-- 定義密碼欄位，並設置為不可為 null -->
+        <property name="password" type="java.lang.String" not-null="true">
+            <column name="password" length="20">
+                <!-- 註解：使用者密碼 -->
+                <!-- <comment>密碼</comment> -->
+            </column>
+        </property>
+        
+        <!-- 定義電話號碼欄位 -->
+        <property name="tel" type="java.lang.String">
+            <column name="tel" length="12">
+                <!-- 註解：電話號碼 -->
+                <!-- <comment>電話號碼</comment> -->
+            </column>
+        </property>
+        
+        <!-- 定義註冊日期欄位 -->
+        <property name="createDate" type="java.util.Date">
+            <column name="create_date" length="7">
+                <!-- 註解：註冊時間 -->
+                <!-- <comment>註冊時間</comment> -->
+            </column>
+        </property>
+    </class>
+</hibernate-mapping>
+

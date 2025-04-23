@@ -17,7 +17,7 @@ import com.example.pojo.entity.User;
  */
 @Repository
 public class UserDaoImpl implements UserDao {
-
+	
     @Autowired
     private SessionFactory sessionFactory; // 注入 SessionFactory 用於 Hibernate 操作
 
@@ -30,8 +30,21 @@ public class UserDaoImpl implements UserDao {
      */
     @Override
     public User getLoginUser(User user) {
+    	System.out.println("[DAO] 開始執行 getLoginUser()");
+    	System.out.println("🧭 檢查 classpath User.hbm.xml： " + Thread.currentThread().getContextClassLoader().getResource("com/example/pojo/hbm/User.hbm.xml"));
+    	System.out.println("DAO 查詢使用者帳號：" + user.getLoginId());
+        System.out.println("DAO 查詢密碼：" + user.getPassword());
         // 使用 Hibernate 查詢
-        return getUserByHibernate(user);
+		/* return getUserByHibernate(user); */
+        User result = getUserByHibernate(user); // ⬅ 呼叫查詢
+
+        if (result == null) {
+            System.out.println("❌ 查無使用者，回傳 null");
+        } else {
+            System.out.println("✅ 查到使用者 user_name = " + result.getUser_name());
+        }
+
+        return result;
     }
 
     /**
@@ -52,6 +65,7 @@ public class UserDaoImpl implements UserDao {
      * @return 如果找到匹配的使用者資料，則回傳 User 物件；否則回傳 null
      */
     private User getUserByHibernate(User user) {
+    	System.out.println("[Hibernate] 查詢開始 loginId = " + user.getLoginId() + ", password = " + user.getPassword());
         // 定義 HQL 查詢語句
         String hql = "from User where loginId = :loginId and password = :password";
         // 使用 Hibernate 的 Query 物件來執行 HQL 查詢
@@ -59,7 +73,7 @@ public class UserDaoImpl implements UserDao {
         query.setParameter("loginId", user.getLoginId());
         query.setParameter("password", user.getPassword());
         List<User> userList = query.list();
-
+        System.out.println("查詢結果筆數：" + userList.size());
         // 若查詢結果不為空，返回第一筆資料
         return userList.isEmpty() ? null : userList.get(0);
     }

@@ -12,7 +12,7 @@ import com.example.pojo.entity.Product;
 
 @Repository
 public class ProductDaoImpl implements ProductDao {
-
+	
     @Autowired
     private SessionFactory sessionFactory;
 

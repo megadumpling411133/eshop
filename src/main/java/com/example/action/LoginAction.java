@@ -39,6 +39,8 @@ public class LoginAction extends BaseAction {
      */
     public String doLogin() {
     	System.out.println("doLogin 檢查登入帳號密碼");
+    	System.out.println("輸入帳號 loginId = " + user.getLoginId());
+        System.out.println("輸入密碼 password = " + user.getPassword());
         // 檢查是否提供了登入 ID 和密碼
         if (user == null || user.getLoginId() == null || user.getPassword() == null) {
         	System.out.println("doLogin 123");
@@ -54,6 +56,7 @@ public class LoginAction extends BaseAction {
         if (user != null && !"".equals(user.getLoginId())) {
             // 登入成功，將用戶資料放入 session 中
             getSession().setAttribute(ConstantName.SESSION_USER, user);
+            System.out.println("[doLogin()] 登入成功，帳號 LoginId：" + user.getLoginId());
             return SUCCESS;
         }
 

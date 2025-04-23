@@ -56,6 +56,12 @@
 		<property name="mappingLocations">
 			<value>classpath:com/example/pojo/hbm/*.hbm.xml</value>
 		</property>
+		<!-- <property name="mappingDirectoryLocations">
+		    <list>
+		        <value>file:src/main/java/com/example/pojo/hbm</value>
+		    </list>
+		</property> -->
+		
 		<!-- Hibernate 相關屬性設定 -->
 		<property name="hibernateProperties">
 			<props>

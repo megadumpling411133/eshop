@@ -21,7 +21,7 @@
     <script src="public/jquery-3.4.1.min.js"></script>
 </head>
 <body>
-    <!-- <form id="loginForm" action="login/login" method="post"> -->
+    <!-- <form id="loginForm" action="login/login" method="post"> --> <!-- 多重 namespace 錯誤  /eshop/login/login/login-->
     <form id="loginForm" action="<s:url action='login' namespace='/login' />" method="post">
     
         <div style="margin: 50px;">
