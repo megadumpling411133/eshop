@@ -21,6 +21,7 @@
     <script src="public/jquery-3.4.1.min.js"></script>
 </head>
 <body>
+	<h3>測試登入：david123@.com</h3>
     <!-- <form id="loginForm" action="login/login" method="post"> --> <!-- 多重 namespace 錯誤  /eshop/login/login/login-->
     <form id="loginForm" action="<s:url action='login' namespace='/login' />" method="post">
     

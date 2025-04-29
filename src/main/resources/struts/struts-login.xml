@@ -32,8 +32,13 @@
             <!-- 
                 當登入成功時，導向至首頁（透過 forward 顯示 index.jsp）
             -->
-            <result name="success">/WEB-INF/views/index.jsp</result>
-
+            <!-- <result name="success">/WEB-INF/views/index.jsp</result> -->
+			
+			<!-- 0429 登入後不經過 index.jsp 而是經過 ProductAction 處理 -->
+			<result name="success" type="redirectAction">
+			    <param name="actionName">list</param>
+			    <param name="namespace">/product</param>
+			</result>
             <!-- 
                 當驗證失敗或欄位為空，forward 回 login.jsp（來自 webapp 根目錄）
             -->

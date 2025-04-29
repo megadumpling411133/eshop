@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN"
+    "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+    <package name="product" namespace="/product" extends="struts-default">
+        <!-- 對應 ProductAction 的 findAll 方法 -->
+        <action name="list" class="com.example.action.ProductAction" method="findAll">
+            <result name="success">/WEB-INF/jsp/ProductList.jsp</result>
+        </action>
+    </package>
+</struts>

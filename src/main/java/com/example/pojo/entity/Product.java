@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class Product {
 
-    private String prod_id;
+    private Integer prod_id;
     private String prod_name;
     private Double prod_price;
     private Integer prod_stock;
@@ -17,14 +17,15 @@ public class Product {
     private Integer prod_review_count;
     private Date prod_create_date;
 
-    public String getProd_id() {
+
+    public Integer getProd_id() {
         return prod_id;
     }
 
-    public void setProd_id(String prod_id) {
+    public void setProd_id(Integer prod_id) {
         this.prod_id = prod_id;
     }
-
+    
     public String getProd_name() {
         return prod_name;
     }

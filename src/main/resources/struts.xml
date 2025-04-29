@@ -3,20 +3,91 @@
     "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN"
     "http://struts.apache.org/dtds/struts-2.1.dtd">
 <struts>
-    <!-- 引用 Struts 預設設定 -->
-    <!-- <include file="struts-default.xml" />
-    <include file="struts/struts-login.xml" />
-    <include file="struts/struts-home.xml" />
-    <include file="struts/struts-register.xml" /> -->
 
     <!-- 常數配置 -->
-    <!-- 核心設定檔 -->
-    <!-- struts.multipart.maxSize -> file upload -->
     <constant name="struts.multipart.maxSize" value="2097152000" />
-    <!-- 設定 url 顯示 OOXX.extension(副檔名) OOXX.ation -->
     <constant name="struts.action.extension" value="action,do,," />
 
-    <!-- 🔹 既有 default package，內含全域攔截器設定 -->
+    <!-- 🔹 default package -->
+    <package name="default" extends="struts-default">
+        <interceptors>
+            <interceptor name="authenticationInterceptor" class="com.example.interceptor.AuthenticationInterceptor" />
+            <interceptor-stack name="globalStack">
+                <interceptor-ref name="authenticationInterceptor" />
+                <interceptor-ref name="fileUpload" />
+                <interceptor-ref name="modelDrivenStack" />
+            </interceptor-stack>
+        </interceptors>
+
+        <default-interceptor-ref name="globalStack" />
+
+        <!-- ✅ 修正 global-results -->
+        <global-results>
+            <result name="login" type="dispatcher">/WEB-INF/views/login.jsp</result>
+            <result name="error" type="dispatcher">/WEB-INF/views/error.jsp</result> <!-- 🔥 改正：跳錯誤頁 -->
+            <result name="other" type="redirectAction">
+                <param name="actionName">login</param>
+                <param name="namespace">/</param>
+            </result>
+        </global-results>
+
+        <global-exception-mappings>
+            <exception-mapping exception="java.lang.Exception" result="error" />
+        </global-exception-mappings>
+    </package>
+
+    <!-- 🔹 product package -->
+    <package name="product" namespace="/product" extends="default">
+        
+        <action name="list" class="com.example.action.ProductAction" method="list">
+            <result name="success">/WEB-INF/jsp/ProductList.jsp</result>
+        </action>
+
+        <action name="findById" class="com.example.action.ProductAction" method="findById">
+            <result name="success">/WEB-INF/jsp/ProductDetail.jsp</result>
+        </action>
+
+        <action name="add" class="com.example.action.ProductAction" method="add">
+            <result name="success" type="redirect">list</result>
+        </action>
+
+        <action name="update" class="com.example.action.ProductAction" method="update">
+            <result name="success" type="redirect">list</result>
+        </action>
+
+        <action name="delete" class="com.example.action.ProductAction" method="delete">
+            <result name="success" type="redirect">list</result>
+        </action>
+
+    </package>
+
+    <!-- 🔹 加入其他功能模組 -->
+    <include file="struts/struts-login.xml"/>
+    <include file="struts/struts-home.xml"/>
+    <include file="struts/struts-register.xml"/>
+    
+</struts>
+
+
+<!-- <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN"
+    "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+    引用 Struts 預設設定
+    <include file="struts-default.xml" />
+    <include file="struts/struts-login.xml" />
+    <include file="struts/struts-home.xml" />
+    <include file="struts/struts-register.xml" />
+
+    常數配置
+    核心設定檔
+    struts.multipart.maxSize -> file upload
+    <constant name="struts.multipart.maxSize" value="2097152000" />
+    設定 url 顯示 OOXX.extension(副檔名) OOXX.ation
+    <constant name="struts.action.extension" value="action,do,," />
+
+    🔹 既有 default package，內含全域攔截器設定
     <package name="default" extends="struts-default">
         <interceptors>
             <interceptor name="authenticationInterceptor"
@@ -44,43 +115,65 @@
         </global-exception-mappings>
     </package>
 
-    <!-- 新增的 product 專用 action package -->
+    新增的 product 專用 action package
     <package name="product" namespace="/product" extends="default">
+		<action name="list" class="com.example.action.ProductAction" method="list">
+		    <result name="success">/WEB-INF/jsp/ProductList.jsp</result>
+		</action>
+		
+		<action name="findById" class="com.example.action.ProductAction" method="findById">
+		    <result name="success">/WEB-INF/jsp/ProductDetail.jsp</result>
+		</action>
+		
+		<action name="add" class="com.example.action.ProductAction" method="add">
+		    <result name="success" type="redirect">list</result>
+		</action>
+		
+		<action name="update" class="com.example.action.ProductAction" method="update">
+		    <result name="success" type="redirect">list</result>
+		</action>
+		
+		<action name="delete" class="com.example.action.ProductAction" method="delete">
+		    <result name="success" type="redirect">list</result>
+		</action>
 
-        <!-- 查詢所有商品（改用 /WEB-INF 路徑） -->
+        查詢所有商品（改用 /WEB-INF 路徑）
         <action name="findAll" class="com.example.action.ProductAction" method="findAll">
             <result name="success">/WEB-INF/jsp/ProductList.jsp</result>
         </action>
 
-        <!-- 查詢單一商品（你可後續建立 ProductDetail.jsp） -->
+        查詢單一商品（你可後續建立 ProductDetail.jsp）
         <action name="findById" class="com.example.action.ProductAction" method="findById">
             <result name="success">/WEB-INF/jsp/ProductDetail.jsp</result>
         </action>
 
-        <!-- 新增商品 -->
+        新增商品
         <action name="add" class="com.example.action.ProductAction" method="add">
             <result name="success" type="redirect">findAll</result>
         </action>
 
-        <!-- 修改商品 -->
+        修改商品
         <action name="update" class="com.example.action.ProductAction" method="update">
             <result name="success" type="redirect">findAll</result>
         </action>
 
-        <!-- 刪除商品 -->
+        刪除商品
         <action name="delete" class="com.example.action.ProductAction" method="delete">
             <result name="success" type="redirect">findAll</result>
         </action>
     </package>
 
-    <!-- 加入的其他功能模組 放在指定的 classpath 之下-->
-    <!-- file 指定其他設定檔與路徑 在主設定檔的 classpath 之下 -->
-    <!-- <include file="struts/struts-login.xml"/>
+    加入的其他功能模組 放在指定的 classpath 之下
+    file 指定其他設定檔與路徑 在主設定檔的 classpath 之下
+    <include file="struts/struts-login.xml"/>
     <include file="struts/struts-register.xml"/>
-    <include file="struts/struts-home.xml"/> -->
-    <!-- 測試繼續加入相同的 include -->
+    <include file="struts/struts-home.xml"/>
+    測試繼續加入相同的 include
     <include file="struts-default.xml" />
     <include file="struts/struts-login.xml" />
     <include file="struts/struts-home.xml" />
     <include file="struts/struts-register.xml" />
+    <include file="struts/struts-product.xml"/>
+    
 </struts>
+ -->

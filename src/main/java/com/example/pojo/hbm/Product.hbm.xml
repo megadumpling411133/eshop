@@ -6,10 +6,10 @@
     <class name="com.example.pojo.entity.Product" table="product">
         <comment>商品資料表</comment>
 
-        <id name="prod_id" type="java.lang.String">
-            <column name="prod_id" length="20"/>
-            <generator class="com.example.utils.IdGenerateUtil"/>
-        </id>
+        <id name="prod_id" type="java.lang.Integer">
+   		 <column name="prod_id" />
+   		 <generator class="native" />
+		</id>
 
         <property name="prod_name" type="java.lang.String">
             <column name="prod_name" length="50"/>

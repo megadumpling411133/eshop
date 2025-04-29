@@ -1,4 +1,26 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+           http://www.springframework.org/schema/beans
+           https://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- ProductDao -->
+    <bean id="productDao" class="com.example.dao.impl.ProductDaoImpl">
+        <property name="sessionFactory" ref="sessionFactory" />
+    </bean>
+
+    <!-- ProductService -->
+    <bean id="productService" class="com.example.service.impl.ProductServiceImpl">
+        <property name="productDao" ref="productDao" />
+    </bean>
+
+    <!-- ProductAction -->
+    <bean id="productAction" class="com.example.action.ProductAction" scope="prototype">
+        <property name="productService" ref="productService" />
+    </bean>
+
+</beans>
+<!-- <?xml version="1.0" encoding="UTF-8" ?>
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:p="http://www.springframework.org/schema/p"
@@ -9,4 +31,4 @@
 		class="org.springframework.jdbc.core.JdbcTemplate">
 		<property name="dataSource" ref="dataSource"></property>
 	</bean>
-</beans>
+</beans> -->
