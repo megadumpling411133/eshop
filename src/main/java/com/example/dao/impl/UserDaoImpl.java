@@ -54,8 +54,9 @@ public class UserDaoImpl implements UserDao {
      */
     @Override
     public void addUser(User user) {
-        // 使用 Hibernate 保存 User 物件
+        System.out.println("📥 UserDaoImpl - 準備寫入使用者：" + user.getLoginId());
         getSession().save(user);
+        System.out.println("✅ Hibernate save() 已呼叫");
     }
 
     /**

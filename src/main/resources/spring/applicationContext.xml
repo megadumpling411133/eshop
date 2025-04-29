@@ -1,37 +1,25 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns:p="http://www.springframework.org/schema/p"
-       xmlns:context="http://www.springframework.org/schema/context"
-       xmlns:aop="http://www.springframework.org/schema/aop"
-       xmlns:tx="http://www.springframework.org/schema/tx"
-       xsi:schemaLocation="
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:context="http://www.springframework.org/schema/context"
+	   xmlns:aop="http://www.springframework.org/schema/aop"
+	   xmlns:tx="http://www.springframework.org/schema/tx"
+	   xsi:schemaLocation="
            http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
            http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd
            http://www.springframework.org/schema/aop https://www.springframework.org/schema/aop/spring-aop.xsd
            http://www.springframework.org/schema/tx https://www.springframework.org/schema/tx/spring-tx.xsd">
 
+	<!-- ✅ 掃描 com.example 包下的所有 Spring Bean，包含 @Service、@Repository、@Controller（不排除） -->
+	<context:component-scan base-package="com.example" />
 
-	<!-- 掃描 com.example 包下的 Spring Bean -->
-	<context:component-scan
-		base-package="com.example">
-		<!-- 排除標記為 @Controller 的類別，這些類應由 Spring MVC 管理 -->
-		<context:exclude-filter type="annotation"
-			expression="org.springframework.stereotype.Controller" />
-		<!-- 排除標記為 @RestController 的類別，這些類應由 Spring MVC 管理 -->
-		<context:exclude-filter type="annotation"
-			expression="org.springframework.web.bind.annotation.RestController" />
-	</context:component-scan>
+	<!-- ✅ 讀取資料庫設定檔 -->
+	<context:property-placeholder location="classpath:spring/jdbc.properties" />
 
-
-	<!-- 讀取 JDBC 設定檔，並可在配置中使用 ${} 變數來引用設定值 -->
-	<context:property-placeholder
-		location="classpath:spring/jdbc.properties" />
-
-	<!-- 使用 C3P0 連線池 -->
+	<!-- ✅ 配置 C3P0 資料來源 -->
 	<bean id="dataSource"
-		class="com.mchange.v2.c3p0.ComboPooledDataSource"
-		destroy-method="close">
+		  class="com.mchange.v2.c3p0.ComboPooledDataSource"
+		  destroy-method="close">
 		<property name="driverClass" value="${jdbc.driverClassName}" />
 		<property name="jdbcUrl" value="${jdbc.url}" />
 		<property name="user" value="${jdbc.username}" />
@@ -39,62 +27,42 @@
 		<property name="initialPoolSize" value="3" />
 		<property name="minPoolSize" value="3" />
 		<property name="maxPoolSize" value="8" />
-		<!-- 當連線池已滿時，自動增加新連線 -->
 		<property name="acquireIncrement" value="5" />
-		<!-- 每 600 秒檢查連線池中的所有閒置連線，超過 MySQL 設定的 wait_timeout 將會被回收 -->
 		<property name="idleConnectionTestPeriod" value="600" />
 		<property name="preferredTestQuery" value="select 1" />
-		<!-- 設為 true 時，取得連線時會檢查連線是否有效，無效則重新獲取連線 -->
 		<property name="testConnectionOnCheckin" value="true" />
 	</bean>
 
-	<!-- 配置 Hibernate 的 SessionFactory -->
+	<!-- ✅ 配置 Hibernate SessionFactory -->
 	<bean id="sessionFactory"
-		class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
-		<!-- 指定資料庫連線 -->
+		  class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
-		<property name="mappingLocations">
-			<value>classpath:com/example/pojo/hbm/*.hbm.xml</value>
-		</property>
-		<!-- <property name="mappingDirectoryLocations">
-		    <list>
-		        <value>file:src/main/java/com/example/pojo/hbm</value>
-		    </list>
-		</property> -->
-		
-		<!-- Hibernate 相關屬性設定 -->
+		<property name="packagesToScan" value="com.example.pojo.entity" />
 		<property name="hibernateProperties">
 			<props>
-				<!-- 設定 Hibernate 方言 -->
 				<prop key="hibernate.dialect">org.hibernate.dialect.MySQL5InnoDBDialect</prop>
-				<!-- 是否在控制台顯示 SQL -->
 				<prop key="hibernate.show_sql">true</prop>
-				<!-- 是否格式化 SQL -->
 				<prop key="hibernate.format_sql">true</prop>
-				<!-- 設定批次查詢與操作的最大筆數 -->
 				<prop key="hibernate.jdbc.fetch_size">50</prop>
 				<prop key="hibernate.jdbc.batch_size">50</prop>
-				<!-- 是否讓 Spring 管理 Hibernate 交易 -->
 				<prop key="hibernate.connection.autocommit">false</prop>
-				<!-- 設定資料表自動建立 -->
-				<prop key="hibernate.hbm2ddl.auto">update</prop> <!-- 可選值：create, update, create-drop, validate -->
+				<prop key="hibernate.hbm2ddl.auto">update</prop>
 			</props>
 		</property>
 	</bean>
 
-	<!-- 配置交易管理器 -->
+	<!-- ✅ 配置交易管理器 -->
 	<bean id="transactionManager"
-		class="org.springframework.orm.hibernate5.HibernateTransactionManager">
+		  class="org.springframework.orm.hibernate5.HibernateTransactionManager">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
 
-	<!-- 使用 Spring AOP 代理交易管理 -->
-	<tx:annotation-driven
-		transaction-manager="transactionManager" />
+	<!-- ✅ 開啟 @Transactional 註解功能 -->
+	<tx:annotation-driven transaction-manager="transactionManager" />
 
-	<!-- 交易攔截器，設定不同方法的交易屬性 -->
+	<!-- ✅ 配置 AOP 交易攔截器（針對 *ServiceImpl） -->
 	<bean id="transactionInterceptor"
-		class="org.springframework.transaction.interceptor.TransactionInterceptor">
+		  class="org.springframework.transaction.interceptor.TransactionInterceptor">
 		<property name="transactionManager" ref="transactionManager" />
 		<property name="transactionAttributes">
 			<props>
@@ -106,9 +74,9 @@
 		</property>
 	</bean>
 
-	<!-- 設定 AOP 自動代理機制，讓特定 Bean 自動被交易攔截器管理 -->
+	<!-- ✅ 自動套用 AOP 到 *ServiceImpl -->
 	<bean id="autoproxy"
-		class="org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator">
+		  class="org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator">
 		<property name="beanNames">
 			<list>
 				<value>*ServiceImpl</value>
@@ -120,8 +88,4 @@
 			</list>
 		</property>
 	</bean>
-
-	<!-- 匯入額外的 Spring 配置 -->
-	<import resource="spring-beans.xml" />
-
 </beans>

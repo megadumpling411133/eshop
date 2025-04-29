@@ -20,13 +20,13 @@ SET FOREIGN_KEY_CHECKS=0;
 -- ----------------------------
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
-  `id` varchar(20) CHARACTER SET utf8 NOT NULL,
-  `name` varchar(20) CHARACTER SET utf8 DEFAULT NULL,
-  `login_id` varchar(20) CHARACTER SET utf8 NOT NULL,
-  `tel` varchar(12) CHARACTER SET utf8 DEFAULT NULL,
-  `create_date` datetime DEFAULT NULL,
-  `password` varchar(20) CHARACTER SET utf8 NOT NULL,
-  PRIMARY KEY (`id`)
+                        `id` varchar(20) CHARACTER SET utf8 NOT NULL,
+                        `name` varchar(20) CHARACTER SET utf8 DEFAULT NULL,
+                        `login_id` varchar(20) CHARACTER SET utf8 NOT NULL,
+                        `tel` varchar(12) CHARACTER SET utf8 DEFAULT NULL,
+                        `create_date` datetime DEFAULT NULL,
+                        `password` varchar(20) CHARACTER SET utf8 NOT NULL,
+                        PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- ----------------------------

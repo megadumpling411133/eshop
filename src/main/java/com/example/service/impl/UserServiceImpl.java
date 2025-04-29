@@ -6,13 +6,16 @@ import org.springframework.stereotype.Service;
 import com.example.dao.UserDao;
 import com.example.pojo.entity.User;
 import com.example.service.UserService;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * UserService 的實作類別，處理與使用者相關的業務邏輯。
  * 這個類別實作了 UserService 介面，並使用 UserDao 來進行資料庫操作。
  * 註解：@Service 標註此類別為 Spring 的服務層 Bean。
  */
+
 @Service
+@Transactional
 public class UserServiceImpl implements UserService {
 
     // 自動注入 UserDao，負責執行實際的資料庫操作

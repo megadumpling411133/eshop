@@ -18,8 +18,7 @@
     </div>
 </s:if>
 
-<!-- 請勿使用 HTML 註解包住 struts 標籤，會導致 Jasper 誤判 -->
-<%-- 使用者註冊表單開始 --%>
+<!-- 使用者註冊表單 -->
 <s:form action="register/save" method="post">
     <s:textfield id="user_id" name="user.user_id" label="使用者ID (user_id)" />
     <s:textfield id="user_name" name="user.user_name" label="使用者名稱 (user_name)" />
@@ -29,7 +28,7 @@
     <s:textfield id="createDate" name="user.createDate" label="註冊日期 (createDate)" />
     <s:submit value="註冊456" />
 </s:form>
-<%-- 使用者註冊表單結束 --%>
+
 <script src="${pageContext.request.contextPath}/public/script.js"></script>
 </body>
 </html>

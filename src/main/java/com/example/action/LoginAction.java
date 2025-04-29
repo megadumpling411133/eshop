@@ -38,30 +38,23 @@ public class LoginAction extends BaseAction {
      * @return 若登入成功返回 SUCCESS，若登入失敗返回 INPUT
      */
     public String doLogin() {
-    	System.out.println("doLogin 檢查登入帳號密碼");
-    	System.out.println("輸入帳號 loginId = " + user.getLoginId());
-        System.out.println("輸入密碼 password = " + user.getPassword());
-        // 檢查是否提供了登入 ID 和密碼
-        if (user == null || user.getLoginId() == null || user.getPassword() == null) {
-        	System.out.println("doLogin 123");
-            // getSession().setAttribute("msg", "請提供有效的帳號與密碼"); 此寫法會讓訊息一直存在 session 中 而每次驗證 只應顯示一次刷新網頁應刷掉訊息
-            getRequest().setAttribute("msg", "請提供有效的帳號與密碼");
+        // 只有在表單送出（按下登入）時才進行驗證
+        if (user == null || user.getLoginId() == null || user.getPassword() == null ||
+                user.getLoginId().trim().isEmpty() || user.getPassword().trim().isEmpty()) {
+            // 初次進入頁面不要顯示錯誤訊息
+            System.out.println("尚未輸入帳密，返回 login.jsp 不顯示錯誤");
             return INPUT;
         }
 
-        // 呼叫 UserService 來獲取使用者資料
+        // 呼叫 service 查詢
         user = userService.getLoginUser(user);
 
-        // 如果用戶資料存在且登入 ID 正確
         if (user != null && !"".equals(user.getLoginId())) {
-            // 登入成功，將用戶資料放入 session 中
             getSession().setAttribute(ConstantName.SESSION_USER, user);
-            System.out.println("[doLogin()] 登入成功，帳號 LoginId：" + user.getLoginId());
+            System.out.println("✅ 登入成功：" + user.getLoginId());
             return SUCCESS;
         }
 
-        // 登入失敗，顯示錯誤訊息並返回輸入頁
-        // getSession().setAttribute("msg", "帳號或密碼錯誤");
         getRequest().setAttribute("msg", "帳號或密碼錯誤");
         return INPUT;
     }
@@ -73,5 +66,13 @@ public class LoginAction extends BaseAction {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public UserService getUserService() {
+        return userService;
+    }
+
+    public void setUserService(UserService userService) {
+        this.userService = userService;
     }
 }

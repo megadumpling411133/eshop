@@ -1,9 +1,14 @@
 package com.example.pojo.entity;
 
+import javax.persistence.*;
 import java.util.Date;
 
+@Entity
+@Table(name = "product") // 對應資料庫 table 名稱
 public class Product {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer prod_id;
     private String prod_name;
     private Double prod_price;
@@ -17,6 +22,7 @@ public class Product {
     private Integer prod_review_count;
     private Date prod_create_date;
 
+    // ✅ 記得要補 Getter / Setter！
 
     public Integer getProd_id() {
         return prod_id;
@@ -25,7 +31,7 @@ public class Product {
     public void setProd_id(Integer prod_id) {
         this.prod_id = prod_id;
     }
-    
+
     public String getProd_name() {
         return prod_name;
     }

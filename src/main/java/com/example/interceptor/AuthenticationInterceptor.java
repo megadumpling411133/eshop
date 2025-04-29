@@ -1,6 +1,9 @@
 package com.example.interceptor;
 
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 import com.example.constant.ConstantName;
 import com.example.pojo.entity.User;
@@ -9,62 +12,54 @@ import com.opensymphony.xwork2.ActionInvocation;
 import com.opensymphony.xwork2.interceptor.Interceptor;
 
 /**
- * 驗證攔截器，用來檢查使用者是否已登入。
- * 若使用者已登入，則允許繼續執行後續的 Action，否則跳轉至登入頁面。
+ * 驗證攔截器：僅攔截需要登入的 Action。
  */
 public class AuthenticationInterceptor implements Interceptor {
 
     private static final long serialVersionUID = 1L;
 
-    /**
-     * 初始化方法，這裡無需額外處理。
-     */
+    // ✅ 不需要驗證登入的 action 名單（根據 actionName 判斷）
+    private static final Set<String> PUBLIC_ACTIONS = new HashSet<>(Arrays.asList(
+            "login", "register", "save",        // 登入註冊流程
+            "ProductList", "ProductDetail",     // 商品瀏覽
+            "addToCart"                         // 未登入也能加進購物車
+    ));
+
     @Override
     public void init() {
-        // 可以在這裡初始化相關的資源，如果需要的話。
+        // 初始化，如果有需要可以放設定
     }
 
-    /**
-     * 銷毀方法，這裡無需額外處理。
-     */
     @Override
     public void destroy() {
-        // 可以在這裡釋放相關資源，如果需要的話。
+        // 資源釋放，如果有需要可以做清理
     }
 
-    /**
-     * 攔截請求並判斷使用者是否登入。
-     * 若已登入，繼續執行後續的 Action，若未登入則返回 "login" 導向登入頁面。
-     * 
-     * @param invocation 包含當前 Action 的調用資訊
-     * @return 若已登入則執行後續 Action，若未登入則返回 "login"
-     * @throws Exception 若發生例外，則會向上拋出
-     */
     @Override
     public String intercept(ActionInvocation invocation) throws Exception {
-        // 檢查使用者是否登入，若已登入，則繼續執行後續 Action，若未登入，則返回登入頁面
-        User user = getLoggedInUser();
-        
-        if (user != null && user.getLoginId() != null && !user.getLoginId().isEmpty()) {
-            // 已登入，繼續執行
+        String actionName = invocation.getProxy().getActionName();
+
+        // ✅ 若 action 在白名單內 → 不檢查登入
+        if (PUBLIC_ACTIONS.contains(actionName)) {
             return invocation.invoke();
         }
-        
-        // 未登入，跳轉至登入頁面
+
+        // ❗ 其餘的需要登入驗證
+        User user = getLoggedInUser();
+        if (user != null && user.getLoginId() != null && !user.getLoginId().isEmpty()) {
+            return invocation.invoke(); // ✅ 已登入 → 繼續
+        }
+
+        // ❌ 未登入 → 回傳 login，轉跳到登入頁
         return "login";
     }
 
     /**
      * 從 Session 中取得目前登入的使用者。
-     * 
-     * @return 若使用者已登入，返回 User 物件，若未登入則返回 null
      */
     private User getLoggedInUser() {
-        // 取得當前 ActionContext 和 Session
         ActionContext ctx = ActionContext.getContext();
-        Map<String, ?> session = ctx.getSession();
-        
-        // 從 Session 中取得使用者物件
+        Map<String, Object> session = ctx.getSession();
         return (User) session.get(ConstantName.SESSION_USER);
     }
 }
